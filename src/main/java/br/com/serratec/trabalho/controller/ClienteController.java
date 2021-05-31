@@ -27,6 +27,15 @@ public class ClienteController {
 
         return new ResponseEntity<>(obter, HttpStatus.OK);
     }
+	
+    @PostMapping
+	public ResponseEntity<Cliente> adicionar(@RequestBody Cliente cliente) {
+
+        var adicionado = this._repositorioCliente.save(cliente);
+
+        return new ResponseEntity<Cliente>(adicionado, HttpStatus.CREATED);		
+
+}
     
     @DeleteMapping("/{id}")
 	public ResponseEntity<Optional<Cliente>> deletar(@PathVariable(value = "id") Long id) {
