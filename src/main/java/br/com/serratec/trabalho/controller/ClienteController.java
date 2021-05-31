@@ -11,23 +11,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.trabalho.model.Cliente;
+import br.com.serratec.trabalho.model.Produto;
 import br.com.serratec.trabalho.repository.ClienteRepository;
 
+@RequestMapping("/api/Trabalho-final")
 @RestController
-@RequestMapping("/api/clientes")
 public class ClienteController {
-	
-	@Autowired
+	@Autowired 
 	private ClienteRepository _repositorioCliente;
 	
-	@GetMapping("/{nome}")
-	public ResponseEntity<Optional<Cliente>> obterPorNome(@PathVariable(value = "nome") String nome ) {
-		var cliente =  _repositorioCliente.findAll()
-					.stream().filter(c -> c.getNome() == nome).findFirst();
-		if(cliente.isEmpty()) {
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		}
+	@GetMapping("/{id}")
+	public ResponseEntity<Optional<Cliente>> obter(@PathVariable(value = "id") Long id){
 		
-		return new ResponseEntity<>(cliente, HttpStatus.OK);
-	}
+		 try { 
+  		   var encontrado = _repositorioCliente.findById(id);
+  		   
+  		    return new ResponseEntity<Optional<Cliente>>(encontrado, HttpStatus.OK);
+  		    
+  	 } catch (ClienteNaoEncontradoException e) {
+  		 
+  		 System.out.println(e.getMessage());
+  		 
+  		 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+  	 }
 }
+	}
+
