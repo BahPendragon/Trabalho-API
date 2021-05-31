@@ -21,13 +21,6 @@ public class ProdutoController {
     @Autowired
     private ProdutoRepository _repositorioProduto;
 
-    /*
-    @GetMapping
-    public List<Produto> obterTodos(){
-        return this._repositorioProduto.findAll();
-    }
-    */
-
     @GetMapping
     public ResponseEntity<Produto> obterTodos(@RequestBody Produto produto){
 
