@@ -35,4 +35,21 @@ public class ClienteController {
 
         return new ResponseEntity<>(obter, HttpStatus.OK);
     }
+    
+    @DeleteMapping("/{id}")
+	public ResponseEntity<Optional<Cliente>> deletar(@PathVariable(value = "id") Long id) {
+		try {
+			
+		var deletado = this._repositorioCliente.deleteById(id);
+		
+		return new ResponseEntity<Optional<Cliente>>(deletado, HttpStatus.OK);
+		
+		} catch (ClienteNaoEncontratoException e) {
+			
+			System.out.println(e.getMessage()); 
+			
+			return new ResponseEntity<Optional<Cliente>>(HttpStatus.NOT_FOUND);
+		}
+	}
+    
 }
