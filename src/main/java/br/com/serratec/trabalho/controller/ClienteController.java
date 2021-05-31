@@ -1,28 +1,28 @@
 package br.com.serratec.trabalho.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.serratec.trabalho.model.Produto;
-import br.com.serratec.trabalho.repository.ProdutoRepository;
+import br.com.serratec.trabalho.model.Cliente;
+import br.com.serratec.trabalho.repository.ClienteRepository;
 
 @RestController
-@RequestMapping("/api/produtos")
+@RequestMapping("/api/clientes")
 public class ClienteController {
     @Autowired
-	private ProdutoRepository _repositorioProduto ;
-	
-	
-	@PostMapping
-	public Produto adicionar(@RequestBody Produto produto) {
-		return this._repositorioProduto.save(produto);
-	}
-	
-	
-	
+	private ClienteRepository _repositorioCliente ;
+
+    @PostMapping
+	public ResponseEntity<Cliente> adicionar(@RequestBody Cliente cliente) {
+
+        var adicionado = this._repositorioCliente.save(cliente);
+
+        return new ResponseEntity<Cliente>(adicionado, HttpStatus.CREATED);
+		
+
 }
