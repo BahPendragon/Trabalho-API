@@ -61,10 +61,10 @@ public class ProdutoController {
      @GetMapping("/{id}")
      public ResponseEntity<Optional<Produto>> obter(@PathVariable(value = "id") Long id){
  		
-    	 try { 
-    	        var encontrado = _repositorioProduto.findById(id);
+    	    try { 
+    	          var encontrado = _repositorioProduto.findById(id);
     		   
-    		return new ResponseEntity<Optional<Produto>> (encontrado, HttpStatus.OK);
+    		  return new ResponseEntity<Optional<Produto>> (encontrado, HttpStatus.OK);
     		    
     	 } catch (ProdutoNaoEncontradoException e) {
     		 
