@@ -8,6 +8,24 @@ public class Cliente {
 	private String estadoCivil;
 	private String profissao;
 	private String cpfOuCnpj;
+
+	public Cliente() {}
+
+	public Cliente(Long id,
+				String nome,
+				Integer idade,
+				String sexo,
+				String estadoCivil,
+				String profissao,
+				String cpfOuCnpj) {
+		this.id = id;
+		this.nome = nome;
+		this.idade = idade;
+		this.sexo = sexo;
+		this.estadoCivil = estadoCivil;
+		this.profissao = profissao;
+		this.cpfOuCnpj = cpfOuCnpj;
+	}
 	
 	public Long getId() {
 		return id;

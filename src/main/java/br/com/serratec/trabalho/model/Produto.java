@@ -6,6 +6,16 @@ public class Produto {
 	private Integer quantidade;
 	private Double valor;
 	private String observacao;
+
+	public Produto() {}
+
+	public Produto(Long id, String nome, Integer quantidade, Double valor, String observacao) {
+		this.id = id;
+		this.nome = nome;
+		this.quantidade = quantidade;
+		this.valor = valor;
+		this.observacao = observacao;
+	}
 	
 	public Long getId() {
 		return id;
