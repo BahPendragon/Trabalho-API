@@ -28,6 +28,15 @@ public class ProdutoController {
 
         return new ResponseEntity<>(obter, HttpStatus.OK);
     }
+	
+   @PostMapping
+	public ResponseEntity<Produto> adicionar(@RequestBody Produto produto) {
+
+        var adicionado = this._repositorioProduto.save(produto);
+
+        return new ResponseEntity<>(adicionado, HttpStatus.CREATED);
+		
+	}
 
     @DeleteMapping("/{id}")
 	public ResponseEntity<Optional<Produto>> deletar(@PathVariable(value = "id") Long id) {
