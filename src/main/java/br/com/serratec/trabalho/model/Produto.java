@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import com.sun.istack.NotNull;
 
 @Entity
@@ -23,6 +22,7 @@ public class Produto {
 	private Double valor;
 	@NotNull
 	private String observacao;
+	
 	public Produto() {}
 
 	public Produto(Long id, String nome, Integer quantidade, Double valor, String observacao) {
