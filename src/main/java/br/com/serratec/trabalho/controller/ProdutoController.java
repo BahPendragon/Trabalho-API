@@ -52,11 +52,6 @@ public class ProdutoController {
 		}
 	}
 
-}
-public class ProdutoController {
-     @Autowired
-     private ProdutoRepository _repositorioProduto;
-     
      @GetMapping("/{id}")
      public ResponseEntity<Optional<Produto>> obter(@PathVariable(value = "id") Integer id){
  		
@@ -72,7 +67,7 @@ public class ProdutoController {
     		 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     	 }
  
- 	}
+    }
      
 }
 
