@@ -35,9 +35,9 @@ public class ClienteController {
     public ResponseEntity<Optional<Cliente>> obter(@PathVariable(value = "id") Long id){
 		
 	 try { 
-  		   var encontrado = _repositorioCliente.findById(id);
+  		var encontrado = _repositorioCliente.findById(id);
   		   
-  		    return new ResponseEntity<Optional<Cliente>>(encontrado, HttpStatus.OK);
+  		return new ResponseEntity<Optional<Cliente>>(encontrado, HttpStatus.OK);
   		    
   	 } catch (ClienteNaoEncontradoException e) {
   		 
@@ -49,45 +49,47 @@ public class ClienteController {
 	
 	
     @PostMapping
-	public ResponseEntity<Cliente> adicionar(@RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> adicionar(@RequestBody Cliente cliente) {
 
-        var adicionado = this._repositorioCliente.save(cliente);
+    var adicionado = this._repositorioCliente.save(cliente);
 
-        return new ResponseEntity<Cliente>(adicionado, HttpStatus.CREATED);		
+    return new ResponseEntity<Cliente>(adicionado, HttpStatus.CREATED);		
 
-}
+ }
+	
     
     @DeleteMapping("/{id}")
-	public ResponseEntity<Optional<Cliente>> deletar(@PathVariable(value = "id") Long id) {
-		try {
+    public ResponseEntity<Optional<Cliente>> deletar(@PathVariable(value = "id") Long id) {
+	   try {
 			
-        this._repositorioCliente.deleteById(id);
+                 this._repositorioCliente.deleteById(id);
 		
-		return new ResponseEntity<Optional<Cliente>>(HttpStatus.OK);
+		 return new ResponseEntity<Optional<Cliente>>(HttpStatus.OK);
 		
-		} catch (ClienteNaoEncontratoException e) {
+	} catch (ClienteNaoEncontratoException e) {
 			
-			System.out.println(e.getMessage()); 
+		System.out.println(e.getMessage()); 
 			
-			return new ResponseEntity<Optional<Cliente>>(HttpStatus.NOT_FOUND);
-		}
+		return new ResponseEntity<Optional<Cliente>>(HttpStatus.NOT_FOUND);
 	}
+}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Cliente> atualizar(@PathVariable(value = "id") Long id, @RequestBody Cliente cliente) {
 		
 		try {
-			cliente.setId(id);
+		       cliente.setId(id);
 			
-			var clienteAtualizado = this._repositorioCliente.save(cliente);
+		       var clienteAtualizado = this._repositorioCliente.save(cliente);
 			
-			return new ResponseEntity<>(clienteAtualizado, HttpStatus.OK);
+		        return new ResponseEntity<>(clienteAtualizado, HttpStatus.OK);
 			
 		} catch (ClienteNaoEncontratoException e) {
+			
 			System.out.println(e.getMessage()); 
 			
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
 	
-	}
+}
