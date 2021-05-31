@@ -26,8 +26,8 @@ public class ClienteController {
     private ClienteRepository _repositorioCliente;
 
     @GetMapping
-    public List<Cliente> obterTodos(@RequestBody Cliente cliente){
-        return this._repositorioCliente.findAll();
+    public List<Cliente> obterTodos(){
+        return this._repositorioCliente.findAll;
     }
 	
         
