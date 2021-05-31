@@ -53,3 +53,26 @@ public class ProdutoController {
 	}
 
 }
+public class ProdutoController {
+     @Autowired
+     private ProdutoRepository _repositorioProduto;
+     
+     @GetMapping("/{id}")
+     public ResponseEntity<Optional<Produto>> obter(@PathVariable(value = "id") Integer id){
+ 		
+    	 try { 
+    		   var encontrado = _repositorioProduto.findById(id);
+    		   
+    		    return new ResponseEntity<Optional<Produto>>(encontrado, HttpStatus.OK);
+    		    
+    	 } catch (ProdutoNaoEncontradoException e) {
+    		 
+    		 System.out.println(e.getMessage());
+    		 
+    		 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    	 }
+ 
+ 	}
+     
+}
+
