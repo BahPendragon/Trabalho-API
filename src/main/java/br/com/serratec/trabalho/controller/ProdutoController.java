@@ -36,6 +36,20 @@ public class ProdutoController {
         return new ResponseEntity<>(obter, HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/{id}")
+	public ResponseEntity<Optional<Produto>> deletar(@PathVariable(value = "id") Long id) {
+		try {
+			
+		var deletado = this._repositorioProduto.deleteById(id);
+		
+		return new ResponseEntity<Optional<Produto>>(deletado, HttpStatus.OK);
+		
+		} catch (ProdutoNaoEncontratoException e) {
+			
+			System.out.println(e.getMessage()); 
+			
+			return new ResponseEntity<Optional<Produto>>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }
