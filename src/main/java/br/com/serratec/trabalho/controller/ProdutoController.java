@@ -27,10 +27,8 @@ public class ProdutoController {
     private ProdutoRepository _repositorioProduto;
 
     @GetMapping
-    public List<Produto> obterTodos(@RequestBody Produto produto){
-
+    public List<Produto> obterTodos(){
         return this._repositorioProduto.findAll();
-
     }
 	
    @PostMapping
