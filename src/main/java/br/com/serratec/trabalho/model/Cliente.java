@@ -1,12 +1,31 @@
 package br.com.serratec.trabalho.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.sun.istack.NotNull;
+
+@Entity
+@Table(name="cliente")
 public class Cliente {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@NotNull
 	private String nome;
+	@NotNull
 	private Integer idade;
+	@NotNull
 	private String sexo;
+	@NotNull
 	private String estadoCivil;
+	@NotNull
 	private String profissao;
+	@NotNull
 	private String cpfOuCnpj;
 
 	public Cliente() {}
