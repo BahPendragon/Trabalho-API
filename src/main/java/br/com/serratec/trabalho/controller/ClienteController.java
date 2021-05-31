@@ -20,14 +20,6 @@ public class ClienteController {
     @Autowired
     private ClienteRepository _repositorioCliente;
 
-
-    /*
-    @GetMapping
-    public List<Cliente> obterTodos(){
-        return this._repositorioCliente.findAll;
-    }
-    */
-
     @GetMapping
     public ResponseEntity<Cliente> obterTodos(@RequestBody Cliente cliente){
 
@@ -52,7 +44,6 @@ public class ClienteController {
 		}
 	}
     
-}
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Cliente>> obter(@PathVariable(value = "id") Long id){
 		
