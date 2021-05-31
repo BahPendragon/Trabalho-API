@@ -53,3 +53,20 @@ public class ClienteController {
 	}
     
 }
+	@GetMapping("/{id}")
+	public ResponseEntity<Optional<Cliente>> obter(@PathVariable(value = "id") Long id){
+		
+		 try { 
+  		   var encontrado = _repositorioCliente.findById(id);
+  		   
+  		    return new ResponseEntity<Optional<Cliente>>(encontrado, HttpStatus.OK);
+  		    
+  	 } catch (ClienteNaoEncontradoException e) {
+  		 
+  		 System.out.println(e.getMessage());
+  		 
+  		 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+  	 }
+}
+	}
+
