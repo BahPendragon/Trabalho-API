@@ -34,10 +34,10 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Cliente>> obter(@PathVariable(value = "id") Long id){
 		
-	 try { 
-  		var encontrado = _repositorioCliente.findById(id);
+	   try { 
+  		 var encontrado = _repositorioCliente.findById(id);
   		   
-  		return new ResponseEntity<Optional<Cliente>>(encontrado, HttpStatus.OK);
+  		 return new ResponseEntity<Optional<Cliente>>(encontrado, HttpStatus.OK);
   		    
   	 } catch (ClienteNaoEncontradoException e) {
   		 
@@ -47,16 +47,14 @@ public class ClienteController {
   	 }
 }
 	
-	
     @PostMapping
     public ResponseEntity<Cliente> adicionar(@RequestBody Cliente cliente) {
 
     var adicionado = this._repositorioCliente.save(cliente);
 
-    return new ResponseEntity<Cliente>(adicionado, HttpStatus.CREATED);		
+    	return new ResponseEntity<Cliente>(adicionado, HttpStatus.CREATED);		
 
  }
-	
     
     @DeleteMapping("/{id}")
     public ResponseEntity<Optional<Cliente>> deletar(@PathVariable(value = "id") Long id) {
