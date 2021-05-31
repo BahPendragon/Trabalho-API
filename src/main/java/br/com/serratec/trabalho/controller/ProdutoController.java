@@ -27,63 +27,81 @@ public class ProdutoController {
     private ProdutoRepository _repositorioProduto;
 
     @GetMapping
-    public List<Produto> obterTodos(){
+    public List<Produto> obterTodos(Produto produto){
+
         return this._repositorioProduto.findAll();
+
     }
-	
-   @PostMapping
-    public ResponseEntity<Produto> adicionar(@RequestBody Produto produto) {
-
-    var adicionado = this._repositorioProduto.save(produto);
-
-     	return new ResponseEntity<>(adicionado, HttpStatus.CREATED);
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Produto>> obter(@PathVariable(value = "id") Long id){
 		
-}
+   	 try { 
+   		   var encontrado = _repositorioProduto.findById(id);
+   		   
+   		    return new ResponseEntity<Optional<Produto>> (encontrado, HttpStatus.OK);
+   		    
+   	 } catch (Exception e) {
+   		 
+   		 System.out.println(e.getMessage());
+   		 
+   		 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+   	 }
+
+   }
+	
+    @GetMapping("/{nome}")
+    public ResponseEntity<Optional<Produto>> obter(@PathVariable(value = "nome") String nome){
+		
+	 try { 
+  		   var encontrado = _repositorioProduto.findByNome(nome);
+  		   
+  		    return new ResponseEntity<Optional<Produto>>(encontrado, HttpStatus.OK);
+  		    
+  	 } catch (Exception e) {
+  		 
+  		 System.out.println(e.getMessage());
+  		 
+  		 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+  	 }
+   }
+    
+   @PostMapping
+	public ResponseEntity<Produto> adicionar(@RequestBody Produto produto) {
+
+        var adicionado = this._repositorioProduto.save(produto);
+
+        return new ResponseEntity<>(adicionado, HttpStatus.CREATED);
+		
+	}
 
     @DeleteMapping("/{id}")
-     public ResponseEntity<Optional<Produto>> deletar(@PathVariable(value = "id") Long id) {
-	    try {
+	public ResponseEntity<Optional<Produto>> deletar(@PathVariable(value = "id") Long id) {
+		try {
 			
-		 this._repositorioProduto.deleteById(id);
+		this._repositorioProduto.deleteById(id);
 		
-		 return new ResponseEntity<Optional<Produto>>(HttpStatus.OK);
+		return new ResponseEntity<Optional<Produto>>(HttpStatus.OK);
 		
-	} catch (ProdutoNaoEncontratoException e) {
+		} catch (Exception e) {
 			
-		System.out.println(e.getMessage()); 
+			System.out.println(e.getMessage()); 
 			
-		return new ResponseEntity<Optional<Produto>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Optional<Produto>>(HttpStatus.NOT_FOUND);
+		}
 	}
-}
-
-     @GetMapping("/{id}")
-     public ResponseEntity<Optional<Produto>> obter(@PathVariable(value = "id") Long id){
- 		
-    	    try { 
-    	          var encontrado = _repositorioProduto.findById(id);
-    		   
-    		  return new ResponseEntity<Optional<Produto>> (encontrado, HttpStatus.OK);
-    		    
-    	 } catch (ProdutoNaoEncontradoException e) {
-    		 
-    		 System.out.println(e.getMessage());
-    		 
-    		 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    	 }
- 
-    }
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Produto> atualizar(@PathVariable(value = "id") Long id, @RequestBody Produto produto) {
 		
 		try {
-		      produto.setId(id);
+			produto.setId(id);
 			
-		      var clienteAtualizado = this._repositorioProduto.save(produto);
+			var clienteAtualizado = this._repositorioProduto.save(produto);
 			
-		      return new ResponseEntity<>(clienteAtualizado, HttpStatus.OK);
+			return new ResponseEntity<>(clienteAtualizado, HttpStatus.OK);
 			
-		} catch (ProdutoNaoEncontratoException e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage()); 
 			
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
