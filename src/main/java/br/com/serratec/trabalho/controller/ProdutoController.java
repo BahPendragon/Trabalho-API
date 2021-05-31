@@ -1,12 +1,14 @@
 package br.com.serratec.trabalho.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,11 +27,10 @@ public class ProdutoController {
     private ProdutoRepository _repositorioProduto;
 
     @GetMapping
-    public ResponseEntity<Produto> obterTodos(@RequestBody Produto produto){
+    public List<Produto> obterTodos(@RequestBody Produto produto){
 
-        var obter = this._repositorioProduto.findAll(produto);
+        return this._repositorioProduto.findAll();
 
-        return new ResponseEntity<>(obter, HttpStatus.OK);
     }
 	
    @PostMapping
@@ -45,9 +46,9 @@ public class ProdutoController {
 	public ResponseEntity<Optional<Produto>> deletar(@PathVariable(value = "id") Long id) {
 		try {
 			
-		var deletado = this._repositorioProduto.deleteById(id);
+		this._repositorioProduto.deleteById(id);
 		
-		return new ResponseEntity<Optional<Produto>>(deletado, HttpStatus.OK);
+		return new ResponseEntity<Optional<Produto>>(HttpStatus.OK);
 		
 		} catch (ProdutoNaoEncontratoException e) {
 			
@@ -58,12 +59,12 @@ public class ProdutoController {
 	}
 
      @GetMapping("/{id}")
-     public ResponseEntity<Optional<Produto>> obter(@PathVariable(value = "id") Integer id){
+     public ResponseEntity<Optional<Produto>> obter(@PathVariable(value = "id") Long id){
  		
     	 try { 
     		   var encontrado = _repositorioProduto.findById(id);
     		   
-    		    return new ResponseEntity<Optional<Produto>>(encontrado, HttpStatus.OK);
+    		    return new ResponseEntity<Optional<Produto>> (encontrado, HttpStatus.OK);
     		    
     	 } catch (ProdutoNaoEncontradoException e) {
     		 
