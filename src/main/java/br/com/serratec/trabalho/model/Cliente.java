@@ -64,7 +64,4 @@ public class Cliente {
 	public void setCpfOuCnpj(String cpfOuCnpj) {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
-	
-	
-
 }
